@@ -1,0 +1,6 @@
+{
+  "name": "HeatSense Bengaluru",
+  "description": "Classical and Quantum Machine Learning for Urban Heat-Risk Classification in Bengaluru",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

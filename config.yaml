@@ -1,0 +1,80 @@
+# HeatSense Bengaluru Research Configuration
+project:
+  name: "HeatSense Bengaluru"
+  study_area: "Bengaluru, Karnataka, India"
+  coordinates:
+    latitude: 12.9716
+    longitude: 77.5946
+    elevation_m: 920
+
+data:
+  default_dataset_path: "data/bengaluru_heat_records.csv"
+  timestamp_column: "timestamp"
+  target_column: "heat_risk_category"
+  feature_columns:
+    - "temperature_2m"
+    - "relative_humidity_2m"
+    - "wind_speed_10m"
+    - "surface_solar_radiation"
+  labeling:
+    method: "heat_index_noaa" # options: heat_index_noaa, imd_criteria, apparent_temp_wbgt, existing_column
+    source_formula: "NOAA/NWS Steadman Heat Index formulation"
+    categories:
+      Low:
+        max_heat_index: 32.0
+        description: "Normal to Caution (Fatigue possible with prolonged exposure)"
+      Moderate:
+        min_heat_index: 32.0
+        max_heat_index: 40.0
+        description: "Extreme Caution (Heat cramps and exhaustion possible)"
+      High:
+        min_heat_index: 40.0
+        description: "Danger / High Heat Risk (Heat exhaustion likely, stroke risk)"
+    high_risk_categories:
+      - "High"
+
+split:
+  strategy: "chronological" # options: chronological, random
+  test_size: 0.25
+  random_seed: 42
+
+classical_models:
+  logistic_regression:
+    C: 1.0
+    max_iter: 1000
+    class_weight: "balanced"
+    solver: "lbfgs"
+  random_forest:
+    n_estimators: 100
+    max_depth: 10
+    min_samples_split: 4
+    class_weight: "balanced"
+    random_state: 42
+
+quantum_models:
+  algorithm: "QSVC" # options: QSVC (Quantum Support Vector Classifier), VQC (Variational Quantum Classifier)
+  feature_map: "ZZFeatureMap" # options: ZZFeatureMap, ZFeatureMap
+  num_qubits: 4
+  reps: 2
+  entanglement: "linear"
+  max_train_samples: 120 # kept manageable for CPU simulation
+  max_test_samples: 60
+  dimensionality_reduction: "PCA" # Scaled PCA to match num_qubits in [0, 2pi]
+  vqc:
+    ansatz_reps: 1
+    optimizer: "COBYLA"
+    maxiter: 25
+
+evaluation:
+  zero_division: 0
+  primary_high_risk_category: "High"
+  metrics:
+    - "accuracy"
+    - "precision_macro"
+    - "recall_macro"
+    - "f1_macro"
+    - "f1_weighted"
+    - "high_risk_recall"
+    - "high_risk_false_negative_rate"
+    - "training_duration_seconds"
+    - "inference_latency_ms"
