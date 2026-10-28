@@ -1,0 +1,177 @@
+{
+  "meta": {
+    "timestamp": "2026-10-28T16:29:31Z",
+    "total_records": 5832,
+    "train_records": 4374,
+    "test_records": 1458,
+    "features": [
+      "temperature_2m",
+      "relative_humidity_2m",
+      "wind_speed_10m",
+      "surface_solar_radiation"
+    ],
+    "target_column": "heat_risk_category",
+    "labeling_method": "heat_index_noaa",
+    "class_names": [
+      "High",
+      "Low",
+      "Moderate"
+    ],
+    "split_strategy": "random"
+  },
+  "models": {
+    "Logistic Regression": {
+      "accuracy": 0.9595336076817559,
+      "precision_macro": 0.8650666361171574,
+      "recall_macro": 0.968785917691661,
+      "f1_macro": 0.9096309909351225,
+      "f1_weighted": 0.9610254617447501,
+      "high_risk_recall": 1.0,
+      "high_risk_fnr": 0.0,
+      "high_risk_counts": {
+        "TP": 43,
+        "FN": 0,
+        "FP": 15,
+        "TN": 1400,
+        "total_actual_high_risk": 43
+      },
+      "class_names": [
+        "High",
+        "Low",
+        "Moderate"
+      ],
+      "confusion_matrix": [
+        [
+          43,
+          0,
+          0
+        ],
+        [
+          0,
+          1099,
+          44
+        ],
+        [
+          15,
+          0,
+          257
+        ]
+      ],
+      "classification_report": {
+        "High": {
+          "precision": 0.7413793103448276,
+          "recall": 1.0,
+          "f1-score": 0.8514851485148515,
+          "support": 43.0
+        },
+        "Low": {
+          "precision": 1.0,
+          "recall": 0.9615048118985127,
+          "f1-score": 0.9803746654772525,
+          "support": 1143.0
+        },
+        "Moderate": {
+          "precision": 0.8538205980066446,
+          "recall": 0.9448529411764706,
+          "f1-score": 0.8970331588132635,
+          "support": 272.0
+        },
+        "accuracy": 0.9595336076817559,
+        "macro avg": {
+          "precision": 0.8650666361171574,
+          "recall": 0.968785917691661,
+          "f1-score": 0.9096309909351225,
+          "support": 1458.0
+        },
+        "weighted avg": {
+          "precision": 0.9651018607699828,
+          "recall": 0.9595336076817559,
+          "f1-score": 0.9610254617447501,
+          "support": 1458.0
+        }
+      },
+      "training_time_seconds": 0.0723,
+      "inference_time_seconds": 0.0005,
+      "latency_ms_per_sample": 0.0004,
+      "test_sample_count": 1458
+    },
+    "Random Forest": {
+      "accuracy": 0.9814814814814815,
+      "precision_macro": 0.9301552106430155,
+      "recall_macro": 0.9492212854948079,
+      "f1_macro": 0.939404741189465,
+      "f1_weighted": 0.9817346260292532,
+      "high_risk_recall": 0.8837209302325582,
+      "high_risk_fnr": 0.11627906976744186,
+      "high_risk_counts": {
+        "TP": 38,
+        "FN": 5,
+        "FP": 6,
+        "TN": 1409,
+        "total_actual_high_risk": 43
+      },
+      "class_names": [
+        "High",
+        "Low",
+        "Moderate"
+      ],
+      "confusion_matrix": [
+        [
+          38,
+          0,
+          5
+        ],
+        [
+          0,
+          1127,
+          16
+        ],
+        [
+          6,
+          0,
+          266
+        ]
+      ],
+      "classification_report": {
+        "High": {
+          "precision": 0.8636363636363636,
+          "recall": 0.8837209302325582,
+          "f1-score": 0.8735632183908046,
+          "support": 43.0
+        },
+        "Low": {
+          "precision": 1.0,
+          "recall": 0.9860017497812773,
+          "f1-score": 0.9929515418502203,
+          "support": 1143.0
+        },
+        "Moderate": {
+          "precision": 0.926829268292683,
+          "recall": 0.9779411764705882,
+          "f1-score": 0.9516994633273703,
+          "support": 272.0
+        },
+        "accuracy": 0.9814814814814815,
+        "macro avg": {
+          "precision": 0.9301552106430155,
+          "recall": 0.9492212854948079,
+          "f1-score": 0.939404741189465,
+          "support": 1458.0
+        },
+        "weighted avg": {
+          "precision": 0.9823277946584181,
+          "recall": 0.9814814814814815,
+          "f1-score": 0.9817346260292532,
+          "support": 1458.0
+        }
+      },
+      "training_time_seconds": 0.5489,
+      "inference_time_seconds": 0.0581,
+      "latency_ms_per_sample": 0.0398,
+      "test_sample_count": 1458
+    },
+    "QSVC (Quantum Kernel)": {
+      "status": "Quantum model training was deselected."
+    }
+  }
+}
